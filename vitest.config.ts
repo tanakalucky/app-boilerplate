@@ -32,6 +32,7 @@ export default defineConfig({
           name: "browser",
           globals: true,
           browser: {
+            screenshotFailures: false,
             enabled: true,
             provider: playwright(),
             instances: [{ browser: "chromium" }],

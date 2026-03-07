@@ -123,9 +123,9 @@
   }
   body {
     @apply bg-background text-foreground;
-    @apply font-sans bg-background text-foreground;
+    @apply h-full bg-background font-sans text-foreground;
   }
   html {
-    @apply font-sans;
+    @apply h-full font-sans;
   }
 }

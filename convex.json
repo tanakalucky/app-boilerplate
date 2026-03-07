@@ -1,0 +1,5 @@
+{
+  "$schema": "./node_modules/convex/schemas/convex.schema.json",
+  "functions": "src/shared/api/convex/",
+  "typescriptCompiler": "tsgo"
+}

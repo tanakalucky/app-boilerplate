@@ -1,27 +1,26 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { StrictMode } from "react";
+import { ClerkProvider, useAuth } from "@clerk/clerk-react";
 
 import "./styles/index.css";
+import { ConvexReactClient } from "convex/react";
+import { ConvexProviderWithClerk } from "convex/react-clerk";
+import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 
 import { ErrorBoundary } from "@/app/providers/ErrorBoundary";
-import { HomePage } from "@/pages/home";
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 3,
-      refetchOnWindowFocus: false,
-    },
-  },
-});
+import { Routes } from "./routes";
+
+const convex = new ConvexReactClient(import.meta.env.VITE_CONVEX_URL as string);
+const publishableKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY as string;
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ErrorBoundary>
-      <QueryClientProvider client={queryClient}>
-        <HomePage />
-      </QueryClientProvider>
+      <ClerkProvider publishableKey={publishableKey}>
+        <ConvexProviderWithClerk client={convex} useAuth={useAuth}>
+          <Routes />
+        </ConvexProviderWithClerk>
+      </ClerkProvider>
     </ErrorBoundary>
   </StrictMode>,
 );
