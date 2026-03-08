@@ -6,10 +6,7 @@ import { Field, FieldError } from "@/shared/ui/Field";
 import { Input } from "@/shared/ui/Input";
 
 import { useTodoMutation } from "../../lib/use-todo-mutation";
-
-interface FormState {
-  error?: string;
-}
+import { FormState } from "../../model/form-state";
 
 export const AddTodo = () => {
   const { userId } = useAuth();

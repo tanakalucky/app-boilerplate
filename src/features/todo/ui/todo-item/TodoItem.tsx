@@ -7,12 +7,8 @@ import { Input } from "@/shared/ui/Input";
 import { Item, ItemActions, ItemContent, ItemDescription } from "@/shared/ui/Item";
 
 import { useTodoMutation } from "../../lib/use-todo-mutation";
+import { FormState } from "../../model/form-state";
 import { Todo } from "../../model/todo";
-
-// FIXME: 共通化するべき
-interface FormState {
-  error?: string;
-}
 
 export const TodoItem = ({ todo }: { todo: Todo }) => {
   const [isEditing, setIsEditing] = useState(false);
