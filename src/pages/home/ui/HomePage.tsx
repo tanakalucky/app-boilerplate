@@ -26,7 +26,7 @@ export function HomePage() {
             <Skeleton className="h-10 w-full" />
           </div>
         ) : (
-          <div className="flex min-h-0 flex-1 flex-col overflow-y-auto">
+          <div className="flex min-h-0 flex-1 flex-col overflow-y-auto" role="list">
             {todos?.map((todo) => (
               <TodoItem key={todo.id} todo={todo} />
             ))}

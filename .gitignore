@@ -110,6 +110,7 @@ Desktop.ini
 test-results/
 playwright-report/
 coverage/
+e2e/.auth/
 
 # Vitest
 coverage
@@ -121,7 +122,3 @@ coverage
 # Claude Code
 .claude/settings.local.json
 .claude/plans/
-
-# AI Workspace (temporary documents)
-.ai-workspace/*/
-!.ai-workspace/README.md

@@ -54,7 +54,7 @@ export const TodoItem = ({ todo }: { todo: Todo }) => {
 
   return (
     <form action={action}>
-      <Item key={todo.id} className="flex flex-row items-start">
+      <Item key={todo.id} className="flex flex-row items-start" role="listitem">
         <ItemContent>
           {isEditing ? (
             <Input name="content" defaultValue={todo.content} />
