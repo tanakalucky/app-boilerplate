@@ -22,35 +22,6 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Get Playwright version
-        id: playwright-version
-        run: |
-          VERSION=$(bunx playwright --version | grep -oP 'Version \K[\d.]+')
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "Playwright version: $VERSION"
-
-      - name: Cache Playwright browsers
-        id: playwright-cache
-        uses: actions/cache@v5
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}-${{ hashFiles('bun.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-${{ steps.playwright-version.outputs.version }}-
-            ${{ runner.os }}-playwright-
-
-      - name: Install Playwright browsers
-        if: steps.playwright-cache.outputs.cache-hit != 'true'
-        run: bunx playwright install chromium
-
-      - name: Playwright cache status
-        run: |
-          if [ "${{ steps.playwright-cache.outputs.cache-hit }}" == "true" ]; then
-            echo "✅ Playwright browsers restored from cache"
-          else
-            echo "📦 Playwright browsers installed fresh"
-          fi
-
       - name: Run linter
         run: bun lint:ci
 
@@ -66,19 +37,21 @@ jobs:
     if: github.event_name == 'pull_request'
 
     steps:
-      - name: Checkout code
+      - name: checkout code
         uses: actions/checkout@v6
 
-      - name: Setup Bun
+      - name: setup bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: "latest"
 
-      - name: Install dependencies
+      - name: install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Build
-        run: bun run build
+      - name: build
+        run: bun dotenvx run -f .env.dev -- bun run build
+        env:
+          DOTENV_PRIVATE_KEY: ${{ secrets.DOTENV_PRIVATE_KEY_DEV }}
 
       - name: Deploy to Cloudflare Workers (Preview)
         uses: cloudflare/wrangler-action@v3

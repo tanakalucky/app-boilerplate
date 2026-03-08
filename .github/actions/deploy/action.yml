@@ -20,6 +20,14 @@ inputs:
     required: false
     default: ""
 
+  dotenv-private-key:
+    description: "dotenvx private key for decrypting env file"
+    required: true
+
+  env-file:
+    description: "Environment file to use for build (e.g. .env.local, .env.production)"
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -33,8 +41,10 @@ runs:
       shell: bash
 
     - name: Build
-      run: bun run build
+      run: bun dotenvx run -f ${{ inputs.env-file }} -- bun run build
       shell: bash
+      env:
+        DOTENV_PRIVATE_KEY: ${{ inputs.dotenv-private-key }}
 
     - name: Deploy
       uses: cloudflare/wrangler-action@v3

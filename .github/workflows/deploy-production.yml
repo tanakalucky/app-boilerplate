@@ -28,3 +28,5 @@ jobs:
           cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           cloudflare-account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           environment: production
+          dotenv-private-key: ${{ secrets.DOTENV_PRIVATE_KEY_PROD }}
+          env-file: .env.production

@@ -40,3 +40,5 @@ jobs:
           cloudflare-account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           environment: preview
           branch-name: ${{ steps.branch.outputs.sanitized }}
+          dotenv-private-key: ${{ secrets.DOTENV_PRIVATE_KEY_DEV }}
+          env-file: .env.local
