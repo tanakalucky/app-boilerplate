@@ -9,12 +9,12 @@
     "check": "bun typecheck && bun run build && wrangler deploy --dry-run",
     "claude:copy": "bun run scripts/copy-claude-config.ts",
     "deploy": "wrangler deploy",
-    "dev": "vite",
+    "dev": "dotenvx run -f .env.dev -- vite",
     "format": "oxfmt .",
     "lint": "oxlint --type-aware --fix",
     "lint:ci": "oxlint --type-aware",
-    "preview": "bun run build && vite preview",
-    "test": "vitest --project unit & vitest --project browser & bun run playwright test",
+    "preview": "dotenvx run -f .env.dev -- bun run build && vite preview",
+    "test": "vitest --project unit & vitest --project browser & dotenvx run -f .env.dev -- bun run playwright test",
     "typecheck": "bun tsgo -b --noEmit",
     "ui:add": "bun run scripts/shadcn-add.ts",
     "ui:organize": "bun run scripts/organize-ui.ts"
@@ -42,6 +42,7 @@
   "devDependencies": {
     "@clerk/testing": "^2.0.1",
     "@cloudflare/vite-plugin": "^1.26.1",
+    "@dotenvx/dotenvx": "^1.54.1",
     "@playwright/test": "^1.58.2",
     "@types/node": "^25.3.5",
     "@types/react": "19.2.14",
