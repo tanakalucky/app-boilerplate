@@ -1,4 +1,5 @@
 import { useAuth } from "@clerk/clerk-react";
+import { Plus } from "lucide-react";
 import { useActionState } from "react";
 
 import { Button } from "@/shared/ui/Button";
@@ -29,16 +30,18 @@ export const AddTodo = () => {
   }, {});
 
   return (
-    <form action={action} className="flex min-w-full items-end gap-4 pr-4 sm:max-w-sm">
-      <Field className="gap-2">
-        <Input name="content" aria-label="TODO" placeholder="TODOを入力" />
+    <form action={action} className="w-full rounded-xl border border-border bg-card p-3 shadow-sm">
+      <div className="flex items-end gap-1.5">
+        <Field className="flex-1 gap-1.5">
+          <Input name="content" aria-label="TODO" placeholder="TODOを入力" />
 
-        {state.error && <FieldError>{state.error}</FieldError>}
-      </Field>
+          {state.error && <FieldError>{state.error}</FieldError>}
+        </Field>
 
-      <Button type="submit" disabled={isPending}>
-        追加
-      </Button>
+        <Button type="submit" disabled={isPending} size="icon" aria-label="追加">
+          <Plus />
+        </Button>
+      </div>
     </form>
   );
 };

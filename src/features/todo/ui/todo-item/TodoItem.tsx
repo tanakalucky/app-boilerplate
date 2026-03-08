@@ -1,6 +1,8 @@
+import { Check, Pencil, Trash2, X } from "lucide-react";
 import { useActionState, useState } from "react";
 
 import { Id } from "@/shared/api";
+import { cn } from "@/shared/lib/utils";
 import { Button } from "@/shared/ui/Button";
 import { FieldError } from "@/shared/ui/Field";
 import { Input } from "@/shared/ui/Input";
@@ -50,7 +52,15 @@ export const TodoItem = ({ todo }: { todo: Todo }) => {
 
   return (
     <form action={action}>
-      <Item key={todo.id} className="flex flex-row items-start" role="listitem">
+      <Item
+        key={todo.id}
+        className={cn(
+          "group/todo-item flex flex-row rounded-none transition-colors hover:bg-muted/50",
+          isEditing && "bg-muted/30",
+          state.error ? "items-start" : "items-center",
+        )}
+        role="listitem"
+      >
         <ItemContent>
           {isEditing ? (
             <Input name="content" defaultValue={todo.content} />
@@ -61,30 +71,55 @@ export const TodoItem = ({ todo }: { todo: Todo }) => {
           {state.error && <FieldError>{state.error}</FieldError>}
         </ItemContent>
 
-        <ItemActions>
+        <ItemActions className="md:opacity-0 md:group-hover/todo-item:opacity-100 md:focus-within:opacity-100">
           {isEditing ? (
             <>
-              <Button type="button" onClick={() => setIsEditing(false)} disabled={isPending}>
-                キャンセル
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon-sm"
+                onClick={() => setIsEditing(false)}
+                disabled={isPending}
+                aria-label="キャンセル"
+              >
+                <X />
               </Button>
 
-              <Button type="submit" name="intent" value="update" disabled={isPending}>
-                保存
+              <Button
+                type="submit"
+                variant="ghost"
+                size="icon-sm"
+                name="intent"
+                value="update"
+                disabled={isPending}
+                aria-label="保存"
+              >
+                <Check />
               </Button>
             </>
           ) : (
             <>
-              <Button type="button" onClick={() => setIsEditing(true)} disabled={isPending}>
-                編集
+              <Button
+                type="button"
+                variant="ghost"
+                size="icon-sm"
+                onClick={() => setIsEditing(true)}
+                disabled={isPending}
+                aria-label="編集"
+              >
+                <Pencil />
               </Button>
               <Button
                 type="submit"
+                variant="ghost"
+                size="icon-sm"
                 name="intent"
                 value="delete"
                 disabled={isPending}
-                className="bg-destructive"
+                className="text-muted-foreground hover:bg-destructive/10 hover:text-destructive"
+                aria-label="削除"
               >
-                削除
+                <Trash2 />
               </Button>
             </>
           )}
