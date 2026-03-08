@@ -1,4 +1,4 @@
-import { useAuth } from "@clerk/clerk-react";
+import { useAuth } from "@clerk/react";
 import { ListTodo } from "lucide-react";
 
 import { AddTodo, TodoItem } from "@/features/todo";

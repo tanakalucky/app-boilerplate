@@ -1,4 +1,4 @@
-import { ClerkProvider, useAuth } from "@clerk/clerk-react";
+import { ClerkProvider, useAuth } from "@clerk/react";
 
 import "./styles/index.css";
 import { ConvexReactClient } from "convex/react";

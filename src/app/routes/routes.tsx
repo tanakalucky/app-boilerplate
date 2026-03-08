@@ -1,4 +1,4 @@
-import { SignIn, useAuth } from "@clerk/clerk-react";
+import { SignIn, useAuth } from "@clerk/react";
 
 import { HomePage } from "@/pages/home";
 

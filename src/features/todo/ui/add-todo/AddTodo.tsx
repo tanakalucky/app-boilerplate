@@ -1,4 +1,4 @@
-import { useAuth } from "@clerk/clerk-react";
+import { useAuth } from "@clerk/react";
 import { Plus } from "lucide-react";
 import { useActionState } from "react";
 

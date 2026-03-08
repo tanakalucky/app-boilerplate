@@ -4,7 +4,7 @@ import { userEvent } from "vitest/browser";
 import { useTodoMutation } from "../../lib/use-todo-mutation";
 import { AddTodo } from "./AddTodo";
 
-vi.mock("@clerk/clerk-react", () => ({
+vi.mock("@clerk/react", () => ({
   useAuth: vi.fn().mockReturnValue({ userId: "user123" }),
 }));
 
