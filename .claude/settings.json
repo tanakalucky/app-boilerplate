@@ -22,7 +22,8 @@
       "Bash(lsof:*)",
       "Bash(sleep:*)",
       "Bash(curl:*)"
-    ]
+    ],
+    "deny": ["Read(*.env*)"]
   },
   "hooks": {
     "PostToolUse": [

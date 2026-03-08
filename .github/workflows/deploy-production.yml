@@ -22,9 +22,22 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      - name: Deploy
-        uses: ./.github/actions/deploy
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          cloudflare-account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          environment: production
+          bun-version: "latest"
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build
+        run: bun dotenvx run -f .env.prod -- bun run build
+        env:
+          DOTENV_PRIVATE_KEY_PROD: ${{ secrets.DOTENV_PRIVATE_KEY_PROD }}
+
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy
