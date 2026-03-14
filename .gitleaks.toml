@@ -1,0 +1,6 @@
+title = "gitleaks config"
+
+[[allowLists]]
+description = "avoid discord api token"
+rules = ["discord-api-token"]
+paths = [".claude/gsd-file-manifest.json"]

@@ -1,7 +1,7 @@
 pre-commit:
   commands:
     gitleaks:
-      run: gitleaks protect --staged --redact --no-banner --verbose
+      run: gitleaks protect --staged --redact --no-banner --verbose --config=.gitleaks.toml
 
     lint:
       glob: "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}"

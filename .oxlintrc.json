@@ -11,5 +11,5 @@
       "entryPoint": "src/app/styles/index.css"
     }
   },
-  "ignorePatterns": ["**/convex/__generated/**"]
+  "ignorePatterns": ["**/convex/__generated/**", ".claude/get-shit-done/**", ".claude/hooks/**"]
 }
