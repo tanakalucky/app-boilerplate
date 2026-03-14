@@ -5,6 +5,7 @@ on:
     branches:
       - "feature/**"
       - "feat/**"
+      - "refactor/**"
       - "renovate/**"
 
 concurrency:
