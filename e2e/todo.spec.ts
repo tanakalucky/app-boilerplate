@@ -21,7 +21,9 @@ test.describe("TODOアプリ", () => {
 
   test("TODOの追加、編集、削除ができる", async ({ page }) => {
     // Arrange
-    await page.goto("/");
+    const list = page.getByRole("list");
+
+    await list.waitFor();
 
     await page.getByLabel("TODO").fill("新しいTODO");
 
