@@ -120,3 +120,5 @@ coverage
 .claude/plans/
 
 .env.keys
+
+.env.local
