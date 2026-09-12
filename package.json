@@ -42,7 +42,7 @@
   "devDependencies": {
     "@clerk/testing": "^2.2.34",
     "@cloudflare/vite-plugin": "^1.54.8",
-    "@dotenvx/dotenvx": "^2.24.0",
+    "@dotenvx/dotenvx": "^2.24.1",
     "@playwright/test": "^1.63.0",
     "@types/node": "^26.5.1",
     "@types/react": "19.3.0",
