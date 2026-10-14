@@ -27,7 +27,7 @@
       "devDependencies": {
         "@clerk/testing": "^2.2.45",
         "@cloudflare/vite-plugin": "^1.63.2",
-        "@dotenvx/dotenvx": "^2.34.2",
+        "@dotenvx/dotenvx": "^2.35.0",
         "@playwright/test": "^1.64.0",
         "@types/node": "^26.6.5",
         "@types/react": "19.3.0",
@@ -142,7 +142,7 @@
 
     "@cspotcode/source-map-support": ["@cspotcode/source-map-support@0.8.1", "", { "dependencies": { "@jridgewell/trace-mapping": "0.3.9" } }, "sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw=="],
 
-    "@dotenvx/dotenvx": ["@dotenvx/dotenvx@2.34.2", "", { "dependencies": { "@dotenvx/primitives": "^3.3.0", "@dotenvx/providers": "^0.3.5", "@dotenvx/tooling": "^1.0.5", "undici": "^6.28.1", "write-file-atomic": "^5.0.1", "yocto-spinner": "^1.2.1" }, "bin": { "dx": "src/cli/dotenvx.js", "dotenvx": "src/cli/dotenvx.js" } }, "sha512-vU83L7W77P4LPpzbkicEraleqEwh6a1mcyRvzZA4D/786mYAQH3yad7be86jx9voAuyWx1QhDcJ8h+Dzzt++ng=="],
+    "@dotenvx/dotenvx": ["@dotenvx/dotenvx@2.35.0", "", { "dependencies": { "@dotenvx/primitives": "^3.3.0", "@dotenvx/providers": "^0.3.5", "@dotenvx/tooling": "^1.0.5", "undici": "^6.28.1", "write-file-atomic": "^5.0.1", "yocto-spinner": "^1.2.1" }, "bin": { "dx": "src/cli/dotenvx.js", "dotenvx": "src/cli/dotenvx.js" } }, "sha512-ft8JhR2leFYT8Y5PBcAHmKySq7z+AgRhjrk/rhPu2hMC/pWfiHzKYfbjiRni4nXdPtDZEwW9yR73v3e0+HYJgg=="],
 
     "@dotenvx/primitives": ["@dotenvx/primitives@3.3.0", "", {}, "sha512-M5GnIMsooWrk3BLgrAs53tqXxd7Rj0Ukc+JnjedLxlvxPkYsBFF/kKrfkpskrrvT/wwma5UdXq+wKHWBcjDe9g=="],
 
