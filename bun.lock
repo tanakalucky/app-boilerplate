@@ -36,7 +36,7 @@
         "@vitejs/plugin-react": "^6.1.2",
         "@vitest/browser-playwright": "^5.0.5",
         "@vitest/ui": "^5.0.5",
-        "eslint-plugin-better-tailwindcss": "^4.9.1",
+        "eslint-plugin-better-tailwindcss": "^4.10.0",
         "lefthook": "^2.2.2",
         "oxfmt": "^0.73.0",
         "oxlint": "^1.88.0",
@@ -704,7 +704,7 @@
 
     "escape-html": ["escape-html@1.0.3", "", {}, "sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow=="],
 
-    "eslint-plugin-better-tailwindcss": ["eslint-plugin-better-tailwindcss@4.9.1", "", { "dependencies": { "@eslint/css-tree": "^4.0.4", "@valibot/to-json-schema": "^1.7.1", "enhanced-resolve": "^5.24.1", "jiti": "^2.7.0", "synckit": "^0.12.3", "tailwind-csstree": "^0.3.3", "tsconfig-paths-webpack-plugin": "^4.2.0", "valibot": "^1.4.2" }, "peerDependencies": { "eslint": "^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0", "oxlint": "^1.35.0", "tailwindcss": "^3.3.0 || ^4.1.17" }, "optionalPeers": ["eslint", "oxlint"] }, "sha512-WOuUOlc27Ib3tcYNt6qhRpvQUie5Y/pNTkwO779QGdfF1tu0k51avWtmvfPv++7/1oVjntoFHcUK4+5a6SPZvA=="],
+    "eslint-plugin-better-tailwindcss": ["eslint-plugin-better-tailwindcss@4.10.0", "", { "dependencies": { "@eslint/css-tree": "^4.0.4", "@valibot/to-json-schema": "^1.7.1", "enhanced-resolve": "^5.24.1", "jiti": "^2.7.0", "synckit": "^0.12.3", "tailwind-csstree": "^0.3.3", "tsconfig-paths-webpack-plugin": "^4.2.0", "valibot": "^1.4.2" }, "peerDependencies": { "eslint": "^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0", "oxlint": "^1.35.0", "tailwindcss": "^3.3.0 || ^4.1.17" }, "optionalPeers": ["eslint", "oxlint"] }, "sha512-EvcfEScF7N39LXuqX8fDnDsgylhbBZe5bbNb+6oN8ht06ou3MvwfPQ5hVgm2LWIPLOB5LBwNDCY6gBQGW4KHGA=="],
 
     "esprima": ["esprima@4.0.1", "", { "bin": { "esparse": "./bin/esparse.js", "esvalidate": "./bin/esvalidate.js" } }, "sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A=="],
 
