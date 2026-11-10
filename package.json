@@ -51,7 +51,7 @@
     "@vitejs/plugin-react": "^6.3.0",
     "@vitest/browser-playwright": "^5.1.0",
     "@vitest/ui": "^5.1.0",
-    "eslint-plugin-better-tailwindcss": "^4.10.0",
+    "eslint-plugin-better-tailwindcss": "^4.11.0",
     "lefthook": "^2.2.2",
     "oxfmt": "^0.78.0",
     "oxlint": "^1.92.0",
