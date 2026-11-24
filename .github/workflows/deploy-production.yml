@@ -1,26 +1,71 @@
 name: Deploy to production
 
 on:
-  pull_request:
-    branches:
-      - main
-    types:
-      - closed
+  workflow_run:
+    workflows: [Test]
+    branches: [main]
+    types: [completed]
   workflow_dispatch:
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+  group: deploy-production
+  cancel-in-progress: false
+
+permissions:
+  actions: read
+  contents: read
 
 jobs:
   deploy:
     name: Deploy
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (
+        github.event_name == 'workflow_dispatch' ||
+        (github.event_name == 'workflow_run' &&
+          github.event.workflow_run.conclusion == 'success' &&
+          github.event.workflow_run.event == 'push' &&
+          github.event.workflow_run.head_branch == 'main' &&
+          github.event.workflow_run.head_repository.full_name == github.repository)
+      )
     runs-on: ubuntu-latest
     environment:
       name: production
 
+    env:
+      DEPLOY_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+
     steps:
+      - name: Verify CI for the current main commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if [[ ! "$DEPLOY_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::対象コミットの SHA が無効です"
+            exit 1
+          fi
+
+          main_sha=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')
+          if [[ "$DEPLOY_SHA" != "$main_sha" ]]; then
+            echo "::error::対象コミットは最新の main ではありません"
+            exit 1
+          fi
+
+          # PR の CI ではなく、同じ SHA に対する main の push CI を確認する。
+          if ! gh api --method GET "repos/$GITHUB_REPOSITORY/actions/workflows/test.yml/runs" \
+            -f branch=main -f event=push -f head_sha="$DEPLOY_SHA" -f status=success -F per_page=1 |
+            jq -e --arg sha "$DEPLOY_SHA" 'any(.workflow_runs[];
+              .head_sha == $sha and .head_branch == "main" and .event == "push" and
+              .status == "completed" and .conclusion == "success")' >/dev/null; then
+            echo "::error::対象コミットの main CI が成功していません"
+            exit 1
+          fi
+
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ env.DEPLOY_SHA }}
+          persist-credentials: false
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -37,6 +82,16 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      - name: Verify main has not advanced before Convex
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          main_sha=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')
+          if [[ "$DEPLOY_SHA" != "$main_sha" ]]; then
+            echo "::error::main が更新されたためデプロイを中止します"
+            exit 1
+          fi
+
       - name: Convex deploy
         run: bun dotenvx run -f .env.prod -- bun run convex deploy
         env:
@@ -46,6 +101,16 @@ jobs:
         run: bun dotenvx run -f .env.prod -- bun run build
         env:
           DOTENV_PRIVATE_KEY_PROD: ${{ secrets.DOTENV_PRIVATE_KEY_PROD }}
+
+      - name: Verify main has not advanced before Cloudflare
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          main_sha=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')
+          if [[ "$DEPLOY_SHA" != "$main_sha" ]]; then
+            echo "::error::main が更新されたためデプロイを中止します"
+            exit 1
+          fi
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v4
