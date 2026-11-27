@@ -62,7 +62,7 @@
     "vite": "8.4.0",
     "vitest": "^5.1.2",
     "vitest-browser-react": "^2.3.0",
-    "wrangler": "^4.168.0"
+    "wrangler": "^4.169.0"
   },
   "cloudflare": {
     "label": "App Boilerplate",
